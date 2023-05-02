@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HandyMarian</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/vue@3.0.2"></script>
+  </head>
+  <body>
+    <h1>HandyMarian</h1>
+
+    <div id="app">
+      <!-- attribute binding -->
+
+      <!-- <a v-bind:href="url">link</a> -->
+
+      <!-- v-bind:href... es lo mismo que :href -->
+
+      <div v-if="showWorks">
+        <h2>Trabajos</h2>
+        <ul>
+          <li
+            v-for="piece in works"
+            :class="{fav:piece.isFav}"
+            @click="toggleFav(piece)"
+          >
+            <img :src="piece.img" :alt="piece.title" />
+            <h3>{{ piece.piece }}</h3>
+            <p>{{piece.material}}</p>
+          </li>
+        </ul>
+      </div>
+      <button @click="toggleShowWorks">
+        <span v-if="!showWorks">Mostrar trabajos</span>
+        <span v-else>Esconder Trabajos</span>
+      </button>
+
+      <br />
+      <!-- mouse events -->
+      <h2>Favoritos</h2>
+      <div v-if="showWorks">
+        <ul>
+          <li
+            v-for="piece in filteredPieces"
+            :class="{fav:piece.isFav}"
+            @click="toggleFav(piece)"
+          >
+            <img :src="piece.img" :alt="piece.title" />
+            <h3>{{ piece.piece }}</h3>
+            <p>{{piece.material}}</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="box" @mouseover="handleEvent($event, 5)">
+        mouseover (enter)
+      </div>
+      <div class="box" @mouseleave="handleEvent">mouseleave</div>
+      <div class="box" @dblclick="handleEvent">doble click</div>
+      <div class="box" @mousemove="handleMousemove">position - {{x}} {{y}}</div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
